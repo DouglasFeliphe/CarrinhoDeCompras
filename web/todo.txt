@@ -1,0 +1,11 @@
+backend
+ [x] listar produtos
+ [x] listar todos os produtos carrinho
+ [x] add produto ao carrinho
+ [x] remove produto carrinho
+ [x] finalizar compra
+
+front-end
+ [x]transformar em spa (adicionar rotas)
+ [x]contabilizar quantidade de produtos no carrinho na tela de produtos
+ 

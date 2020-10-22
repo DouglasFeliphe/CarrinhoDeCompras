@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        #btn-shopping-cart {
+            margin-top: 15%;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body class="container" ng-app='app' ng-controller="MainController">
+    <div class="row valign-wrapper">
+        <div class="col s10 l10">
+            <h1>Produtos</h1>
+        </div>
+        <div id="btn-shopping-cart" class="col s2 l2">
+            <div class="row valign-wrapper">
+                <div class="col s12 l12">
+                    <a href="carrinho.html" class="btn-floating pulse btn-large waves-effect waves-light red">
+                        <i class="material-icons">shopping_cart</i>
+                    </a>
+                </div>
+                <div class="col s12">
+                    <span class="new badge" data-badge-caption="novo(s)">{{quantidade}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <table class="container highlight ">
+        <thead>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr ng-repeat='produto in produtos'>
+                <td>{{produto.nome}} </td>
+                <td>{{produto.preco}}</td>
+                <td>
+                    <button class="btn" ng-click="decrementarQuantidade(produto)">-</button>
+                    <span class="btn-flat toast-action"> {{produto.quantidade}}</span>
+                    <button class="btn" ng-click="incrementarQuantidade(produto)">+</button>
+                </td>
+                <td>
+                    <button ng-click='addProduto(produto)' class="btn waves-effect waves-light blue" type="submit"
+                        name="action">Adicionar ao carrinho
+                        <i class="material-icons right">send</i>
+                    </button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/ProdutoController.js"></script>
+</body>
+
+
+</html>

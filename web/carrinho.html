@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        #btn-shopping-cart {
+            margin-top: 15%;
+        }
+
+        table caption {
+            border-radius: 2px;
+            background: #f2f2f2;
+            padding: 11px;
+            border: 1px solid #f2f2f2;
+
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body class="container" ng-app='app' ng-controller="MainController">
+
+    <h1>Meu Carrinho</h1>
+    <table class="container highlight ">
+        <thead>
+            <th>ID</th>
+            <th>Produto</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Total</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr ng-repeat='produto in produtos'>
+                <td>{{produto.id = $index}}</td>
+                <td>{{produto.nome}}</td>
+                <td>{{produto.preco}}</td>
+                <td>{{produto.quantidade}}</td>
+                <td>{{produto.quantidade * produto.preco}}</td>
+                <td><button class="btn yellow darken-2" ng-click="removeProduto(produto)">Remover</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col l6"></div>
+        <div class="col l6">
+            <table class="container highlight z-depth-2 rounded">
+                <caption><b> Total no carrinho</b></caption>
+                <tr>
+                    <th>Subtotal</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Entrega</th>
+                    <td><strong>R$ 15.00</strong></td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <td><strong>R${{total}}</strong> </td>
+                </tr>
+                <tr>
+                    <td><button class="btn green" ng-click='finalizarCompra()'>Finalizar Compra</button></td>
+                    <td><button class="btn red" ng-click='cancelarCompra()'>Cancelar Compra</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br>
+    <a href="index.html" class="btn">Escolher mais produtos</a>
+
+    <script src="js/index.js"></script>
+    <script src="js/CarrinhoDeComprasController.js"></script>
+</body>
+
+
+</html>
