@@ -4,6 +4,8 @@ CRUD com carrinho de compras utilizando <a href='https://angular.io/'>AngularJS<
 
 Funcionalidades:
 <ul>
+  <li>Visualizar lista de produtos</li>
+  <li>Visualizar produtos do carrinho</li>
   <li>Adicionar produto ao carrinho</li>
   <li>Remover produto do carrinho</li>
   <li>Fazer checkout</li>
