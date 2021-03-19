@@ -6,7 +6,9 @@
   "dependencies": {
     "express": "^4.17.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
   "scripts": {
     "dev": "node src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
