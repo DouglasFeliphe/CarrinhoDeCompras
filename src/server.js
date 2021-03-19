@@ -7,8 +7,8 @@ const app = express()
 
 app.use(express.json())
 app.use(clientRoutes)
-app.use(productRoutes)
-app.use(shoppingCartRoutes)
+// app.use(productRoutes)
+// app.use(shoppingCartRoutes)
 
 app.listen(
     process.env.PORT | 3000,
