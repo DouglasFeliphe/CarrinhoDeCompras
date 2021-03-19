@@ -7,26 +7,15 @@ module.exports = {
     },
 
     async create(req, res) {
-
-        var { name, password } = request.body
+        let { name, password } = req.body
         password += crypto.randomBytes(4).toString('HEX')
 
-        await db.connect()
-
-        db.query(
-            { text: 'INSERT INTO carrinho_de_compras.client VALUES ($1, $2)' },
-            { values: [name, password] }
-
-        ).then((ret) => {
-            return response.json({
-                status: 200,
-                dadosEnviados: request.body
-            })
-        })
+        const { rows } = await db.query('INSERT INTO carrinho_de_compras.client VALUES ($1, $2)')
+        res.send(rows[0])
     },
 
 
-    async show(request, response) {
+    async show(req, res) {
 
         // const placa = request.params
         // try {
