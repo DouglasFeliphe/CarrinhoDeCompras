@@ -1,22 +1,28 @@
-
+const db = require('../database_connection');
 module.exports = {
 
-    async index(request, response) {
-        // const clients = await connection('clients').select('*')
-        // if (!clients) {
-        //     return response.status(400).json({ error: 'No user was found ' })
-        // }
-        return response.json('ok')
+    async index(req, res) {
+        const { rows } = await db.query('SELECT * FROM client')
+        res.send(rows[0])
     },
 
-    async create(request, response) {
-        // var { name, password } = request.body
-        // password += crypto.randomBytes(4).toString('HEX')
-        // await connection('clients').insert({
-        //     name,
-        //     password
-        // })
-        // return response.json({ name })
+    async create(req, res) {
+
+        var { name, password } = request.body
+        password += crypto.randomBytes(4).toString('HEX')
+
+        await db.connect()
+
+        db.query(
+            { text: 'INSERT INTO carrinho_de_compras.client VALUES ($1, $2)' },
+            { values: [name, password] }
+
+        ).then((ret) => {
+            return response.json({
+                status: 200,
+                dadosEnviados: request.body
+            })
+        })
     },
 
 

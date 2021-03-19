@@ -3,9 +3,6 @@ const clientController = require('../controllers/clientController');
 
 const routes = express()
 
-routes.get("/", (req, res) => {
-    res.status(200).send("Hello World!");
-});
 routes.get('/clients', clientController.index)
 routes.get('/clients/:id', clientController.show)
 routes.post('/client', clientController.create)

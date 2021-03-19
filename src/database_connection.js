@@ -1,6 +1,7 @@
-const pg = require('pg');
+const { Pool } = require('pg');
+const { param } = require('./Routes/clientRoutes');
 
-const database_connection = new pg.Client(
+const pool = new Pool(
     {
         user: 'postgres',
         host: 'localhost',
@@ -10,4 +11,6 @@ const database_connection = new pg.Client(
     }
 )
 
-module.exports = database_connection
+module.exports = {
+    query: (text, params) => pool.query(text, params)
+}
