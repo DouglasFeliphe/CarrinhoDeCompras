@@ -8,6 +8,7 @@ module.exports = {
 
     async create(req, res) {
         let { name, password } = req.body
+        typeof (req.body)
         password += crypto.randomBytes(4).toString('HEX')
 
         const { rows } = await db.query('INSERT INTO carrinho_de_compras.client VALUES ($1, $2)')

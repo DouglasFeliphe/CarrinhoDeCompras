@@ -22,10 +22,10 @@ describe('Test the clients path', () => {
     test('should post client', async () => {
 
         const { rows } = await db.query("SELECT * FROM client WHERE name = 'baz'")
-        console.log(rows[0]);
+
         const res = await supertest(clientRoutes)
             .post('/client')
-            .send({ name: 'baz', password: 333333 })
+            .send(JSON.stringify({ name: 'baz', password: 333333 }))
             .set('Accept', 'application/json')
         expect(res.body).toEqual(rows[0])
     });

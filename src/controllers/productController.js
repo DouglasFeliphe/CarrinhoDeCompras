@@ -1,13 +1,24 @@
 
+const db = require('../database_connection')
 
 module.exports = {
 
     async index(request, response) {
-        // const products = await connection('products').select('*')
-        // if (!products) {
-        //     return response.status(400).json({ error: 'No product was found. ' })
-        // }
-        // return response.json(products)
+
+        try {
+            const { rows } = await db.query('SELECT * FROM produtos')
+            if (!rows) {
+                return response.status(404).json({ message: '0 results returned' })
+            }
+            return response.json(rows)
+
+        } catch (error) {
+            return response.status(400).json({
+                message: 'Ocorreu um erro ao listar os produtos.',
+                error: error.message
+            })
+        }
+
     },
 
     async create(request, response) {

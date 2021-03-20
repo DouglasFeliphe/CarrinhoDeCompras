@@ -11,7 +11,7 @@ app.use(productRoutes)
 app.use(shoppingCartRoutes)
 
 app.listen(
-    process.env.PORT | 3000,
+    process.env.PORT | 3333,
     console.log('Servindo rodando...')
 )
 
