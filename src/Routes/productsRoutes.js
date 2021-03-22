@@ -3,10 +3,6 @@ const productsController = require('../controllers/productsController')
 
 const routes = express()
 
-// routes.get('/produtos', productsController.index)
-// routes.get('/produtos/:codigo', productsController.show)
-// routes.post('/produto', productsController.create)
-// routes.put('/produtos/:codigo', productsController.update)
-// routes.delete('/produtos/:codigo', productsController.delete)
+routes.get('/produtos', productsController.index)
 
 module.exports = routes
