@@ -3,10 +3,10 @@ const clientController = require('../controllers/clientController');
 
 const routes = express()
 
-routes.get('/clients', clientController.index)
-routes.get('/clients/:id', clientController.show)
-routes.post('/client', clientController.create)
-routes.put('/clients/:id', clientController.update)
-routes.delete('/clients/:id', clientController.delete)
+routes.get('/clientes', clientController.index)
+routes.get('/clientes/:codigo', clientController.show)
+routes.post('/cliente', clientController.create)
+routes.put('/clientes/:codigo', clientController.update)
+routes.delete('/clientes/:codigo', clientController.delete)
 
 module.exports = routes;

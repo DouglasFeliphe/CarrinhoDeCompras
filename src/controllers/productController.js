@@ -6,7 +6,8 @@ module.exports = {
     async index(request, response) {
 
         try {
-            const { rows } = await db.query('SELECT * FROM produtos')
+            const { rows } = await db.query('SELECT codigo, nome, quantidade FROM produtos')
+
             if (!rows) {
                 return response.status(404).json({ message: '0 results returned' })
             }

@@ -2,10 +2,10 @@ const express = require('express')
 
 const routes = express.Router()
 
-routes.get('/shoppingCarts')
-routes.get('/shoppingCarts/:id')
-routes.post('/shoppingCart')
-routes.put('/shoppingCarts/:id')
-routes.delete('/shoppingCarts/:id')
+routes.get('/carrinho_de_compras')
+routes.get('/carrinho_de_compras/:codigo')
+routes.post('/carrinho_de_compras')
+routes.put('/carrinho_de_compras/:codigo')
+routes.delete('/carrinho_de_compras/:codigo')
 
 module.exports = routes

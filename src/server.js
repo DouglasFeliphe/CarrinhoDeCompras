@@ -10,10 +10,10 @@ app.use(clientRoutes)
 app.use(productRoutes)
 app.use(shoppingCartRoutes)
 
-app.listen(
-    process.env.PORT | 3333,
-    console.log('Servindo rodando...')
-)
+let listener = app.listen(3333, function () {
+    console.log('Server rodando na porta ' + listener.address().port); //Listening on port 8888
+});
+
 
 
 

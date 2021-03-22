@@ -6,6 +6,7 @@ const pool = new Pool(
         user: 'postgres',
         host: 'localhost',
         database: 'BDII_TSI',
+        schema: 'carrinho_de_compras',
         password: 'admin',
         port: 5432,
     }
