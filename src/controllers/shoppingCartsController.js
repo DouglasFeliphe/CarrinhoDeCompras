@@ -31,7 +31,7 @@ module.exports = {
     },
 
     async show(request, response) {
-        const { codigo } = request.params
+        const { cod_cliente } = request.params
 
         try {
             const { rows } = await db.query(
@@ -41,7 +41,7 @@ module.exports = {
                 'inner join carrinho_de_compras.produtos as pd ' +
                 'on cc.cod_produto = pd.codigo ' +
                 'where c.codigo = $1',
-                [codigo]
+                [cod_cliente]
             )
 
             if (!rows) {
@@ -61,5 +61,26 @@ module.exports = {
     },
 
     async delete(request, response) {
+        const { cod_cliente, cod_produto } = request.params
+        console.log(cod_cliente, cod_produto)
+        try {
+            const { rows } = await db.query(
+                'DELETE FROM carrinho_de_compras.carrinho_de_compras as cc ' +
+                'WHERE cc.cod_cliente = $1 ' +
+                'AND cc.cod_produto = $2 ',
+                [cod_cliente, cod_produto]
+            )
+
+            if (!rows) {
+                return response.status(404).json({ message: 'produto não encontrado.' })
+            }
+            return response.json({ message: 'produto excluido do carrinho com sucesso.' })
+
+        } catch (error) {
+            return response.status(400).json({
+                message: 'Ocorreu um erro ao deletar o produto do carrinho do cliente.',
+                error: error.message
+            })
+        }
     }
 }
