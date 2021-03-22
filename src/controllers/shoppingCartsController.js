@@ -2,11 +2,8 @@ const db = require('../database_connection')
 
 module.exports = {
 
-    async index(request, response) {
-    },
-
     async create(request, response) {
-        const { cod_cliente, cod_produto } = request.body
+        const { cod_cliente, cod_produto } = request.params
 
         try {
 
@@ -44,7 +41,7 @@ module.exports = {
                 [cod_cliente]
             )
 
-            if (!rows) {
+            if (!rows[0]) {
                 return response.status(404).json({ message: '0 resultados retornados.' })
             }
             return response.json(rows)
@@ -57,23 +54,17 @@ module.exports = {
         }
     },
 
-    async update(request, response) {
-    },
-
     async delete(request, response) {
         const { cod_cliente, cod_produto } = request.params
-        console.log(cod_cliente, cod_produto)
+
         try {
-            const { rows } = await db.query(
+            await db.query(
                 'DELETE FROM carrinho_de_compras.carrinho_de_compras as cc ' +
                 'WHERE cc.cod_cliente = $1 ' +
                 'AND cc.cod_produto = $2 ',
                 [cod_cliente, cod_produto]
             )
 
-            if (!rows) {
-                return response.status(404).json({ message: 'produto não encontrado.' })
-            }
             return response.json({ message: 'produto excluido do carrinho com sucesso.' })
 
         } catch (error) {
@@ -82,5 +73,27 @@ module.exports = {
                 error: error.message
             })
         }
-    }
+    },
+
+    async deleteAll(request, response) {
+        const { cod_cliente } = request.params
+
+        try {
+            await db.query(
+                'DELETE FROM carrinho_de_compras.carrinho_de_compras as cc ' +
+                'WHERE cc.cod_cliente = $1',
+                [cod_cliente]
+            )
+
+            return response.json({ message: 'produtos excluidos do carrinho com sucesso.' })
+
+        } catch (error) {
+            return response.status(400).json({
+                message: 'Ocorreu um erro ao deletar os produtos do carrinho do cliente.',
+                error: error.message
+            })
+        }
+    },
 }
+
+
