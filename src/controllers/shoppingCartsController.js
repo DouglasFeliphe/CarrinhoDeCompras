@@ -6,7 +6,28 @@ module.exports = {
     },
 
     async create(request, response) {
-        
+        const { cod_cliente, cod_produto } = request.body
+
+        try {
+
+            await db.query(
+                'INSERT INTO carrinho_de_compras.carrinho_de_compras VALUES ($1, $2)',
+                [cod_cliente, cod_produto]
+            )
+
+            const { rows } = await db.query(
+                'SELECT pd.* from carrinho_de_compras.produtos as pd WHERE pd.codigo = $1',
+                [cod_produto]
+            )
+
+            return response.json(rows[0])
+
+        } catch (error) {
+            return response.status(400).json({
+                message: 'Ocorreu um erro ao adicionar o produto no carrinho do cliente.',
+                error: error.message
+            })
+        }
     },
 
     async show(request, response) {
