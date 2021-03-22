@@ -4,11 +4,20 @@ const crypto = require('crypto')
 module.exports = {
 
     async index(request, response) {
-        const shoppingCarts = await connection('shoppingCarts').select('*')
-        if (!shoppingCarts) {
-            return response.status(400).json({ error: 'No user was found ' })
+        try {
+            const { rows } = await db.query('SELECT cod_cliente, cod_produto, valor_total, desconto FROM carrinho_de_compras.carrinho_de_compras')
+
+            if (!rows) {
+                return response.status(404).json({ message: '0 resultados para carrinho de compras.' })
+            }
+            return response.json(rows)
+
+        } catch (error) {
+            return response.status(400).json({
+                message: 'Ocorreu um erro ao listar os carrinhos.',
+                error: error.message
+            })
         }
-        return response.json(shoppingCarts)
     },
 
     async create(request, response) {
@@ -20,7 +29,6 @@ module.exports = {
         })
         return response.json({ name })
     },
-
 
     async show(request, response) {
 
@@ -42,6 +50,7 @@ module.exports = {
             })
         }
     },
+
     async update(request, response) {
 
         const { placa } = request.params
@@ -58,6 +67,7 @@ module.exports = {
             return response.status(500).json(error.message)
         }
     },
+
     async delete(request, response) {
         const { placa } = request.params
 

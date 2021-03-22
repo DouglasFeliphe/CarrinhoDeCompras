@@ -1,5 +1,5 @@
 const { Pool } = require('pg');
-const { param } = require('./Routes/clientRoutes');
+const { param } = require('./Routes/clientsRoutes');
 
 const pool = new Pool(
     {
