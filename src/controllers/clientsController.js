@@ -21,12 +21,34 @@ module.exports = {
 
     async show(request, response) {
 
-        const { codigo } = request.params
+        const { nome, email } = request.body
+        let codigo
 
         try {
-            const { rows } = await db.query('SELECT * FROM carrinho_de_compras.clientes WHERE codigo = $1', [codigo])
+            const { rows } = await db.query(
+                'SELECT codigo FROM carrinho_de_compras.clientes ' +
+                'WHERE nome = $1 ' +
+                'AND email = $2 ',
+                [nome, email]
+            )
+            codigo = rows[0].codigo
 
-            if (!rows) {
+        } catch (error) {
+            return response.status(400).json({
+                message: 'Ocorreu um erro ao buscar o código do cliente.',
+                error: error.message
+            })
+        }
+
+
+        try {
+
+            const { rows } = await db.query(
+                'SELECT * FROM carrinho_de_compras.clientes WHERE codigo = $1',
+                [codigo]
+            )
+
+            if (!rows[0]) {
                 return response.status(404).json({ message: '0 resultados encontrados.' })
             }
             return response.json(rows[0])
