@@ -31,7 +31,11 @@ module.exports = {
                 'AND email = $2 ',
                 [nome, email]
             )
-            codigo = rows[0].codigo
+            codigo = rows[0].codigo            
+
+            if (!rows[0]) {
+                return response.status(404).json({ message: '0 resultados encontrados.' })
+            }
 
         } catch (error) {
             return response.status(400).json({

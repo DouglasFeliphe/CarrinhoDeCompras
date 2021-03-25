@@ -42,7 +42,7 @@ module.exports = {
             )
 
             if (!rows[0]) {
-                return response.status(404).json({ message: '0 resultados retornados.' })
+                return response.status(202).json({ message: '0 resultados retornados.' })
             }
             return response.json(rows)
 
